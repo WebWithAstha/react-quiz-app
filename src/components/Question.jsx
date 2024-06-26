@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import LoadingQuestion from './LoadingQuestion'
-import { asyncChangeAnswers, asyncSetPage } from '../store/actions/allQuestionActions'
-import { load } from '../store/reducers/userQuizDataSlice'
+import { asyncChangeAnswers, asyncLoad, asyncSetPage } from '../store/actions/allQuestionActions'
 
 const Question = () => {
     const dispatch = useDispatch()
-    let { number } = useParams()
     const { userQuizData } = useSelector(store => store.userQuizDataSlice)
     const [currentChoice, setcurrentChoice] = useState(null)
     const [pageNo, setpageNo] = useState(userQuizData.pageNo)
     const question = userQuizData.questions[pageNo]
 
-    console.log(pageNo)
 
     useEffect(() => {
         if (userQuizData.answers) {
@@ -29,6 +26,12 @@ const Question = () => {
         copyAnswers[pageNo] = copyChoice
         dispatch(asyncChangeAnswers(copyAnswers))
 
+    }
+
+    const submitHandler = ()=>{
+        const updateQuizData = {...userQuizData}
+        updateQuizData.quizes = parseInt(updateQuizData.quizes) +1
+        dispatch(asyncLoad(updateQuizData))
     }
 
     return (
@@ -73,8 +76,6 @@ const Question = () => {
 
                     </div>
                     <div className="flex w-full gap-2 items-center justify-between">
-                        {/* {number !== "0" ?
-                            <Link className='w-1/2 mr-auto' to={`/question/${parseInt(number) - 1}`}> */}
                         <button onClick={(e) => pageNo > 0 ? setpageNo(pageNo - 1) : ''}
                             className="relative w-full py-2 px-2 mt-0 text-sky-700 uppercase text-base font-bold overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-sky-300/[.8] before:to-sky-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-lg hover:before:left-0">
                             Previous
@@ -85,14 +86,12 @@ const Question = () => {
                             Next
                         </button>
                     </div>
-                    {pageNo === "9" ?
                         <Link className='w-1/2 ml-auto' to={`/result`}>
-                            <button
+                            <button onClick={submitHandler}
                                 className="relative w-full mt-4 py-2 px-2 text-sky-700 uppercase text-base font-bold overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 ">
                                 Submit
                             </button>
                         </Link>
-                        : ""}
                 </div>
 
             </div>

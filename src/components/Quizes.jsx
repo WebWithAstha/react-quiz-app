@@ -75,15 +75,13 @@ const Intro = () => {
                     <img className='w-full h-full object-cover' src="https://cdn-icons-png.flaticon.com/512/924/924874.png" alt="" />
                 </div>
             </div>
-            {/* <div className="flex flex-col gap-4 items-center justify-between  p-2"> */}
-
-                <div className="w-full justify-between shadow-lg border-4 border-zinc-300/[.1] bg-zinc-500/[.1] rounded-lg py-2 px-2 flex items-center gap-2">
+                <div className="w-full justify-between shadow-lg border-4 border-zinc-200/[.1] bg-zinc-400/[.1] rounded-lg py-2 px-2 flex items-center gap-2">
                     <img className='w-8 object-contain' src="https://cdn-icons-png.flaticon.com/512/2827/2827957.png" alt="" />
                     <h1 className='text-lg font-bold opacity-40'>Total Enrolled</h1>
                     <p className='text-sm text-sky-500 font-bold'>{userQuizData.quizes}</p>
                 </div>
                 <h1 className='text-lg font-bold mt-6'>Mixed quiz</h1>
-                <div className="w-full justify-between mt-4 flex-col shadow-lg border-4 border-zinc-300/[.1] bg-zinc-500/[.1] rounded-lg py-2 px-2 flex items-center">
+                <div className="w-full justify-between mt-4 flex-col shadow-lg border-4 border-zinc-200/[.1] bg-zinc-400/[.1] rounded-lg py-2 px-2 flex items-center">
                     <img className='w-20 object-contain' src="https://cdn-icons-png.flaticon.com/512/6662/6662917.png" alt="" />
                     <h2 className='font-semibold leading-tight mt-2 capitalize'>Random</h2>
                     <h4 className='text-sm'>10 questions</h4>
@@ -94,7 +92,7 @@ const Intro = () => {
                 <div className="grid grid-cols-2 grid-rows-4 mt-4 gap-6">
                     {categories.map((cat, i) => (
                         <Link to={`/question`} key={i} onClick={(e) => getQusetions(cat.category, cat.tag)}>
-                            <div className="h-max rounded-lg border-2 border-zinc-300/[.1] bg-zinc-500/[.1] shadow-lg p-4">
+                            <div className="h-max rounded-lg border-2 border-zinc-200/[.1] bg-zinc-400/[.1] shadow-lg p-4">
                                 <img className='w-16 object-contain' src={cat.image} alt="" />
                                 <h2 className='font-semibold leading-tight mt-2 capitalize'>{cat.tag ? cat.tag : cat.category}</h2>
                                 <h4 className='text-sm'>10 questions</h4>
