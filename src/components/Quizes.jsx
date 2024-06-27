@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Axios from '../utils/axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { asyncLoad} from '../store/actions/allQuestionActions'
+import { asyncLoad} from '../store/actions/userQuizDataAction'
 
 const Intro = () => {
 
@@ -14,8 +14,8 @@ const Intro = () => {
         { category: 'sql', image: "https://cdn-icons-png.flaticon.com/512/4492/4492311.png" },
         { category: 'cms', image: "https://cdn-icons-png.flaticon.com/512/3950/3950815.png" },
         { category: 'bash', image: "https://cdn-icons-png.flaticon.com/512/919/919837.png" },
-        { category: 'docker', image: "https://cdn-icons-png.flaticon.com/512/2721/2721652.png" },
-        { category: 'code', tag: 'php', image: "https://cdn-icons-png.flaticon.com/512/2721/2721652.png" },
+        { category: 'docker', image: "https://cdn-icons-png.flaticon.com/512/15466/15466088.png" },
+        { category: 'code', tag: 'php', image: "https://cdn-icons-png.flaticon.com/512/5968/5968332.png" },
     ];
 
     const dispatch = useDispatch()
@@ -40,7 +40,6 @@ const Intro = () => {
         const { data } = await Axios.get(`/questions?apiKey=0t8gkoXo9bdE32smqbPtWlf1zL45hcoDrdBH5qpg&limit=10&category=${category?category:''}&difficulty=easy&tags=${tag ? tag : ''}`)
 
         // setting initial answers are false
-        // const 
         const answers = data.map(q => {
             const result = {};
             Object.entries(q.answers).forEach(([key, val]) => {
@@ -50,8 +49,8 @@ const Intro = () => {
         });
 
         // creating userQuizData
-        const userQuizData = {
-            quizes: 0,
+        const updatedUserQuizData = {
+            quizes: userQuizData.quizes || 0,
             pageNo:0,
             questions: data,
             category,
@@ -60,7 +59,7 @@ const Intro = () => {
         }
 
 
-        dispatch(asyncLoad(userQuizData))
+        dispatch(asyncLoad(updatedUserQuizData))
 
     }
 
@@ -77,7 +76,7 @@ const Intro = () => {
             </div>
                 <div className="w-full justify-between shadow-lg border-4 border-zinc-200/[.1] bg-zinc-400/[.1] rounded-lg py-2 px-2 flex items-center gap-2">
                     <img className='w-8 object-contain' src="https://cdn-icons-png.flaticon.com/512/2827/2827957.png" alt="" />
-                    <h1 className='text-lg font-bold opacity-40'>Total Enrolled</h1>
+                    <h1 className='text-lg font-bold opacity-40'>Quiz attended</h1>
                     <p className='text-sm text-sky-500 font-bold'>{userQuizData.quizes}</p>
                 </div>
                 <h1 className='text-lg font-bold mt-6'>Mixed quiz</h1>
