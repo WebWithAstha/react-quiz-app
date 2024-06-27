@@ -9,7 +9,7 @@ const ViewAnswers = () => {
       {
         location.state.map((q,i)=>{
           return (
-            <div className=' border-4 border-zinc-200/[.1] bg-zinc-300/[.1]'>
+            <div key={i} className=' border-4 border-zinc-200/[.1] bg-zinc-300/[.1]'>
             <div className='p-4 rounded-lg'>
               <h1 className='font-medium leading-tight text-sm text-zinc-700'> <span className='mr-2 text-black'>{i+1}.</span>{q.question}</h1>
               <h1 className='font-semibold py-1 text-green-700'><span className='text-black mr-1'>Ans. </span>{q.answer}</h1>
