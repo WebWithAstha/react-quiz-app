@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import LoadingQuestion from './LoadingQuestion'
-import { asyncChangeAnswers, asyncLoad, asyncSetPage } from '../store/actions/allQuestionActions'
+import { asyncChangeAnswers, asyncLoad, asyncSetPage } from '../store/actions/userQuizDataAction'
 
 const Question = () => {
     const dispatch = useDispatch()
@@ -25,12 +25,14 @@ const Question = () => {
         const copyAnswers = [...userQuizData.answers]
         copyAnswers[pageNo] = copyChoice
         dispatch(asyncChangeAnswers(copyAnswers))
-
     }
+
 
     const submitHandler = ()=>{
         const updateQuizData = {...userQuizData}
+        console.log(updateQuizData.quizes)
         updateQuizData.quizes = parseInt(updateQuizData.quizes) +1
+        console.log(updateQuizData.quizes)
         dispatch(asyncLoad(updateQuizData))
     }
 
@@ -77,12 +79,12 @@ const Question = () => {
                     </div>
                     <div className="flex w-full gap-2 items-center justify-between">
                         <button onClick={(e) => pageNo > 0 ? setpageNo(pageNo - 1) : ''}
-                            className="relative w-full py-2 px-2 mt-0 text-sky-700 uppercase text-base font-bold overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-sky-300/[.8] before:to-sky-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-lg hover:before:left-0">
-                            Previous
+                            className={`relative ${pageNo > 0 ? '' : 'hidden'} w-full py-2 px-2 mt-0 text-sky-700 uppercase text-base font-bold overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-sky-300/[.8] before:to-sky-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-lg hover:before:left-0`}>
+                            Prev
                         </button>
 
                         <button onClick={(e) => pageNo < 9 ? setpageNo(pageNo + 1) : ''}
-                            className="relative w-full py-2 px-2 mt-0 text-sky-700 uppercase text-base font-bold overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-sky-300/[.8] before:to-sky-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-lg hover:before:left-0">
+                            className={`relative ${pageNo < 9 ? '' : 'hidden'} w-full py-2 px-2 mt-0 text-sky-700 uppercase text-base font-bold overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-sky-300/[.8] before:to-sky-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-lg hover:before:left-0`}>
                             Next
                         </button>
                     </div>
