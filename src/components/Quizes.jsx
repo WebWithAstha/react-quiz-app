@@ -80,12 +80,13 @@ const Intro = () => {
                     <p className='text-sm text-sky-500 font-bold'>{userQuizData.quizes}</p>
                 </div>
                 <h1 className='text-lg font-bold mt-6'>Mixed quiz</h1>
+                <Link to={`/question`} onClick={(e) => getQusetions()}>
                 <div className="w-full justify-between mt-4 flex-col shadow-lg border-4 border-zinc-200/[.1] bg-zinc-400/[.1] rounded-lg py-2 px-2 flex items-center">
                     <img className='w-20 object-contain' src="https://cdn-icons-png.flaticon.com/512/6662/6662917.png" alt="" />
                     <h2 className='font-semibold leading-tight mt-2 capitalize'>Random</h2>
                     <h4 className='text-sm'>10 questions</h4>
-
                 </div>
+                </Link>
             <div className="mt-4">
                 <h1 className='text-lg font-bold mt-6'>Pick quiz of choice</h1>
                 <div className="grid grid-cols-2 grid-rows-4 mt-4 gap-6">
